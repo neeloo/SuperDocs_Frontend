@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import "./App.css";
 
 const API = "http://localhost:8080/api";
-
 function App() {
 
   const [document, setDocument] = useState(null);
@@ -32,8 +31,7 @@ function App() {
 
   async function loadDocument() {
 
-    const response =
-      await fetch(`${API}/documents/1`);
+    const response =await fetch(`${API}/documents/1`);
 
     const data = await response.json();
 
@@ -42,8 +40,7 @@ function App() {
 
   async function loadEvents() {
 
-    const response =
-      await fetch(`${API}/documents/1/events?afterVersion=0`);
+    const response =await fetch(`${API}/documents/1/events?afterVersion=0`);
 
     const data = await response.json();
 
@@ -52,8 +49,7 @@ function App() {
 
   async function loadConflicts() {
 
-    const response =
-      await fetch(`${API}/conflicts/document/1`);
+    const response =await fetch(`${API}/conflicts/document/1`);
 
     const data = await response.json();
 
@@ -63,54 +59,30 @@ function App() {
   async function submitEdit() {
 
     if (!document) return;
-
-    const response =
-      await fetch(`${API}/documents/1/edits`, {
-
+    const response =await fetch(`${API}/documents/1/edits`, {
         method: "POST",
-
-        headers: {
-          "Content-Type": "application/json"
-        },
-
+        headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
-
           writerId: writer,
-
           baseVersion: document.version,
-
           fieldName: field,
-
           oldValue: oldValue,
-
           newValue: newValue
         })
       });
 
     const result = await response.text();
-
     alert(result);
-
     loadDocument();
     loadEvents();
     loadConflicts();
   }
 
-  async function resolveConflict(
-      conflictId,
-      decision
-  ) {
-
-    await fetch(
-      `${API}/conflicts/${conflictId}/resolve`,
+  async function resolveConflict(conflictId,decision) {
+    await fetch(`${API}/conflicts/${conflictId}/resolve`,
       {
-
         method: "POST",
-
-        headers: {
-          "Content-Type": "application/json"
-        },
-
+        headers: { "Content-Type": "application/json"},
         body: JSON.stringify({
           decision: decision
         })
@@ -120,79 +92,35 @@ function App() {
     loadDocument();
     loadConflicts();
   }
-
   if (!document) {
-
-    return (
-      <div className="container">
-        Loading...
-      </div>
-    );
+    return (<div className="container"> Loading...</div> );
   }
 
   return (
-
     <div className="container">
-
       <h1>Soft Collaboration Reconciler</h1>
-
       <div className="document-header">
-
         <h2>{document.name}</h2>
-
-        <span>
-          Version: {document.version}
-        </span>
-
+        <span> Version: {document.version}</span>
       </div>
-
       <div className="card">
-
         <h3>Current Document</h3>
-
-        <pre>
-          {document.content}
-        </pre>
-
+        <pre>{document.content}</pre>
       </div>
-
       <div className="card">
-
         <h3>Make Edit</h3>
-
-        <select
-          value={writer}
-          onChange={(e) =>
-            setWriter(e.target.value)
-          }
-        >
-
-          <option value="WRITER-A">
-            Writer A
-          </option>
-
-          <option value="WRITER-B">
-            Writer B
-          </option>
-
+        <select value={writer} onChange={(e) => setWriter(e.target.value) }>
+          <option value="WRITER-A">Writer A</option>
+          <option value="WRITER-B"> Writer B</option>
         </select>
 
-        <input
-          value={field}
-          onChange={(e) =>
-            setField(e.target.value)
-          }
-          placeholder="Field"
-        />
-
-        <input
+        <input value={field} onChange={(e) =>setField(e.target.value)}placeholder="Field"/> <input
           value={oldValue}
           onChange={(e) =>
             setOldValue(e.target.value)
           }
           placeholder="Old value"
         />
-
         <input
           value={newValue}
           onChange={(e) =>
@@ -201,16 +129,13 @@ function App() {
           placeholder="New value"
         />
 
-        <button onClick={submitEdit}>
-          Submit Edit
-        </button>
+        <button onClick={submitEdit}>Submit Edit  </button>
 
       </div>
 
       <div className="card">
 
         <h3>Incoming Changes</h3>
-
         {events.map(event => (
 
           <div

@@ -1,7 +1,7 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: #dabcbc;
+  background: #dfd9d9;
 }
 
 .container {
@@ -11,7 +11,7 @@ body {
 }
 
 .card {
-  background: rgb(230, 173, 173);
+  background: rgb(248, 245, 245);
   padding: 20px;
   margin: 20px 0;
   border-radius: 8px;
@@ -25,7 +25,7 @@ body {
 }
 
 pre {
-  background: #a39595;
+  background: #e1dcdc;
   padding: 20px;
   white-space: pre-wrap;
 }
@@ -46,14 +46,14 @@ button {
 
 .event {
   padding: 15px;
-  border-left: 4px solid #2196f3;
+  border-left: 4px solid #dadee1;
   margin: 10px 0;
-  background: #839bb3;
+  background: #ebeef0;
 }
 
 .conflict {
   padding: 20px;
   margin: 15px 0;
   border-left: 5px solid #f44336;
-  background: #383131;
+  background: #ded3d3;
 }
